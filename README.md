@@ -5,7 +5,7 @@
 ```
 //webpack和webpack-cli提供打包服务
 //webpack-dev-server提供热更新服务
-yarn add webpack webpack-cli webpack-dev-server -D
+yarn add webpack webpack-cli webpack-dev-server webpack-merge-D
 ```
 
 2. 安装样式的 loader
@@ -17,7 +17,7 @@ yarn add style-loader css-loader sass sass-loader -D
 3. 安装其它文件的 loader
 
 ```
-
+yarn add url-loader -D
 ```
 
 4. 安装 vue 的 loader
@@ -52,4 +52,6 @@ yarn add @babel/core @babel/preset-env @babel/preset-typescript @babel/plugin-pr
 
 yarn add @babel/runtime @babel/runtime-corejs3
 ```
-tsconfig.json放在
+tsconfig.json放在项目根目录下
+
+8. [调整webpack配置](https://segmentfault.com/a/1190000014804826)

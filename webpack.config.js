@@ -3,12 +3,13 @@ const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require("webpack");
 const CopyPlugin = require("copy-webpack-plugin");
+const { resolve } = require("path");
 const baseConfig = {
-	mode: "development",
-	entry: "./src/main.ts",
+	entry: resolve("./src/main.ts"),
+	mode:"development",
 	output: {
 		filename: "js/[name].bundle.js",
-		chunkFilename: 'js/[name].chunk.js',
+		chunkFilename: "js/[name].chunk.js",
 		clean: true,
 		path: path.resolve(__dirname, "dist"),
 	},
