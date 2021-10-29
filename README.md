@@ -11,7 +11,7 @@ yarn add webpack webpack-cli webpack-dev-server -D
 2. 安装样式的 loader
 
 ```
-yarn add style-loader css-loader sass-loader -D
+yarn add style-loader css-loader sass sass-loader -D
 ```
 
 3. 安装其它文件的 loader
@@ -48,7 +48,7 @@ yarn add vue@next vuex@next vue-router@next
 //@babel/preset-typescript 解析typescript的语法
 //@babel/plugin-proposal-class-properties 支持typescript的类的写法
 //@babel/plugin-proposal-object-rest-spread 支持typescript的三点展开符
-yarn add @babel/core @babel/preset-env @babel/preset-typescript @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread -D
+yarn add @babel/core @babel/preset-env @babel/preset-typescript @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread @babel/plugin-transform-runtime @vue/cli-plugin-babel -D
 
 yarn add @babel/runtime @babel/runtime-corejs3
 ```

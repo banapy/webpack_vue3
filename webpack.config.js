@@ -7,8 +7,8 @@ const baseConfig = {
 	mode: "development",
 	entry: "./src/main.ts",
 	output: {
-		filename: "js/[name].js",
-		chunkFilename: '[name].bundle.js',
+		filename: "js/[name].bundle.js",
+		chunkFilename: 'js/[name].chunk.js',
 		clean: true,
 		path: path.resolve(__dirname, "dist"),
 	},
@@ -69,13 +69,19 @@ const baseConfig = {
 			//输出文件名
 			filename: "index.html",
 			//生成html参考的模板
-			template: "./public/index.html",
+			template: "./public/index.ejs",
 			//防止报BASE_URL找不到的错误
 			templateParameters: {
 				BASE_URL: "/",
 			},
 			title: "webpack5配置vue3开发环境测试",
 			inject: "body",
+		}),
+		new webpack.DefinePlugin({
+			"process.env": {
+				NODE_ENV: '"development"',
+				BASE_URL: '""',
+			},
 		}),
 		new VueLoaderPlugin(),
 		new CopyPlugin({
