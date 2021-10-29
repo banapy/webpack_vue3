@@ -1,12 +1,12 @@
-const { merge } = require("webpack-merge");
-const baseWebpackConfig = require("./base.config");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { resolve } = require("./index");
-const webpack = require("webpack");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const { merge } = require('webpack-merge')
+const baseWebpackConfig = require('./base.config')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { resolve } = require('./index')
+const webpack = require('webpack')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const devWebpackConfig = merge(baseWebpackConfig, {
-	devtool: "source-map",
+	devtool: 'source-map',
 	devServer: {
 		compress: true,
 		port: 8089,
@@ -16,22 +16,22 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 	},
 	plugins: [
 		new webpack.DefinePlugin({
-			"process.env": {
+			'process.env': {
 				NODE_ENV: '"development"',
 				BASE_URL: '""',
 			},
 		}),
 		new HtmlWebpackPlugin({
 			//输出文件名
-			filename: "index.html",
+			filename: 'index.html',
 			//生成html参考的模板
-			template: resolve("./public/index.ejs"),
+			template: resolve('./public/index.ejs'),
 			//防止报BASE_URL找不到的错误
 			templateParameters: {
-				BASE_URL: resolve("/"),
+				BASE_URL: resolve('/'),
 			},
-			title: "webpack5配置vue3开发环境测试",
-			inject: "body",
+			title: 'webpack5配置vue3开发环境测试',
+			inject: 'body',
 		}),
 		//babel转移typescript,ForkTsCheckerWebpackPlugin检查ts类型错误，在调试台打印出错误
 		new ForkTsCheckerWebpackPlugin({
@@ -39,7 +39,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 				extensions: {
 					vue: {
 						enabled: true,
-						compiler: "@vue/compiler-sfc",
+						compiler: '@vue/compiler-sfc',
 					},
 				},
 				diagnosticOptions: {
@@ -49,5 +49,5 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 			},
 		}),
 	],
-});
-module.exports = devWebpackConfig;
+})
+module.exports = devWebpackConfig

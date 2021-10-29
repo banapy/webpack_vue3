@@ -34,6 +34,7 @@ yarn add vue-loader@next vue-template-es2015-compiler -D
 //html-webpack-plugin提取html到dist文件夹，并为html文件中引入的外部资源如script、link动态添加每次compile后的hash，防止引用缓存的外部文件问题
 //copy-webpack-plugin赋值文件或文件夹，用于将public的静态文件直接拷贝到dist文件夹里
 yarn add html-webpack-plugin copy-webpack-plugin -D
+yarn add extract-text-webpack-plugin optimize-css-assets-webpack-plugin uglifyjs-webpack-plugin webpack-bundle-analyzer -D
 
 ```
 
