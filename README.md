@@ -73,6 +73,7 @@ yarn add typescript ts-loader fork-ts-checker-webpack-plugin -D
 ```
 yarn add inquirer shelljs -D
 yarn add @commitlint/config-conventional @commitlint/cli -D
+yarn add husky -D
 ```
 
 11. 添加代码规范检查,代码写错时在调试台会有错误提示
