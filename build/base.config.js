@@ -8,7 +8,7 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const baseConfig = {
 	mode: "development",
 	entry: resolve("./src/main.ts"),
-	context: __dirname,
+	// context: __dirname,
 	output: {
 		filename: "js/[name].bundle.js",
 		chunkFilename: "js/[name].chunk.js",

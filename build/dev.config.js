@@ -3,7 +3,7 @@ const baseWebpackConfig = require("./base.config");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { resolve } = require("./index");
 const webpack = require("webpack");
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const devWebpackConfig = merge(baseWebpackConfig, {
 	devtool: "source-map",
@@ -12,7 +12,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 		port: 8089,
 	},
 	optimization: {
-		noEmitOnErrors: true, //当webpack编译错误的时候，来中端打包进程，防止错误代码打包到文件中
+		emitOnErrors: false, //当webpack编译错误的时候，来中端打包进程，防止错误代码打包到文件中
 	},
 	plugins: [
 		new webpack.DefinePlugin({
@@ -33,7 +33,21 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 			title: "webpack5配置vue3开发环境测试",
 			inject: "body",
 		}),
-		
+		//babel转移typescript,ForkTsCheckerWebpackPlugin检查ts类型错误，在调试台打印出错误
+		new ForkTsCheckerWebpackPlugin({
+			typescript: {
+				extensions: {
+					vue: {
+						enabled: true,
+						compiler: "@vue/compiler-sfc",
+					},
+				},
+				diagnosticOptions: {
+					semantic: true,
+					syntactic: false,
+				},
+			},
+		}),
 	],
 });
 module.exports = devWebpackConfig;

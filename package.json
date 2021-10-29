@@ -6,7 +6,9 @@
 	"scripts": {
 		"start": "webpack serve --config ./build/dev.config.js",
 		"check-types": "tsc --watch",
-		"build": "webpack"
+		"build": "webpack",
+		"commitlint": "commitlint -e",
+		"commit": "node commit/git-commit.js"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.15.8",
@@ -23,9 +25,14 @@
 		"fork-ts-checker-webpack-plugin": "^6.4.0",
 		"friendly-errors-webpack-plugin": "^1.7.0",
 		"html-webpack-plugin": "5.1.0",
+		"inquirer": "^8.2.0",
+		"prettier": "^2.4.1",
 		"sass": "^1.43.4",
 		"sass-loader": "^12.3.0",
+		"shelljs": "^0.8.4",
 		"style-loader": "^3.3.1",
+		"ts-loader": "^9.2.6",
+		"typescript": "^4.4.4",
 		"url-loader": "^4.1.1",
 		"vue-loader": "^16.8.2",
 		"vue-template-es2015-compiler": "^1.9.1",

@@ -1,16 +1,19 @@
 <template>
-  <div class="home">
-    homehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehome
-  </div>
+	<div class="home">
+		homehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehomehome
+	</div>
 </template>
 <script lang='ts'>
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 export default defineComponent({
-  name: "home",
-  setup(props, { slots, emit }) {
-    return {};
-  },
-});
+	name: 'home',
+	setup(props, { slots, emit }) {
+		const a: { str: string } = {
+			str: '',
+		}
+		return {}
+	},
+})
 </script>
 <style lang="scss" scoped>
 .home {
