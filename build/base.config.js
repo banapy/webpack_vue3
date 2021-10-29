@@ -112,9 +112,9 @@ const workerConfig = {
 	context: __dirname,
 	devtool: "source-map",
 	resolve: {
-		extensions: [".webpack.js", ".web.ts", ".ts", ".tsx", ".web.js", ".js"],
+		extensions: [".js", ".ts"],
 		alias: {
-			"react-native": "react-native-web",
+			"@": resolve("src"),
 		},
 		fallback: {
 			fs: false,

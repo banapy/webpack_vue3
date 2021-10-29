@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const {merge} = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const baseWebpackConfig = require("./prod.config.js");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -25,7 +25,10 @@ const webpackConfig = merge(baseWebpackConfig, {
 	},
 	plugins: [
 		new webpack.DefinePlugin({
-			"process.env": env,
+			"process.env": {
+				NODE_ENV: 'production',
+				BASE_URL: '',
+			},
 		}),
 		new UglifyJsPlugin({
 			uglifyOptions: {
