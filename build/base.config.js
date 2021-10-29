@@ -3,6 +3,7 @@ const { VueLoaderPlugin } = require("vue-loader");
 const webpack = require("webpack");
 const CopyPlugin = require("copy-webpack-plugin");
 const { resolve } = require("./index");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const baseConfig = {
 	mode: "development",
@@ -33,6 +34,15 @@ const baseConfig = {
 					},
 				],
 			},
+			// {
+			// 	test: /\.tsx?$/,
+			// 	loader: "ts-loader",
+			// 	exclude: /node_modules/,
+			// 	options: {
+			// 		// disable type checker - we will use it in fork plugin
+			// 		transpileOnly: true,
+			// 	},
+			// },
 			{
 				test: /\.(t|j)s$/,
 				exclude: /node_modules/,
@@ -106,6 +116,7 @@ const baseConfig = {
 				},
 			],
 		}),
+	
 	],
 };
 const workerConfig = {
@@ -129,7 +140,7 @@ const workerConfig = {
 				options: {
 					configFile: path.join(process.cwd(), "tsconfig.json"),
 					onlyCompileBundledFiles: true,
-					transpileOnly: false,
+					transpileOnly: true, //关闭类型检查，即只进行转译
 					projectReferences: true,
 					compilerOptions: {
 						sourceMap: !false,

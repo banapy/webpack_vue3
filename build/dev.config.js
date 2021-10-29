@@ -3,6 +3,7 @@ const baseWebpackConfig = require("./base.config");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { resolve } = require("./index");
 const webpack = require("webpack");
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const devWebpackConfig = merge(baseWebpackConfig, {
 	devtool: "source-map",
@@ -32,6 +33,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 			title: "webpack5配置vue3开发环境测试",
 			inject: "body",
 		}),
+		
 	],
 });
 module.exports = devWebpackConfig;
