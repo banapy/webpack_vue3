@@ -68,9 +68,11 @@ yarn add typescript ts-loader fork-ts-checker-webpack-plugin -D
 ```
 
 10. 添加提交代码规范
+    [commitlint](https://blog.csdn.net/qq_38290251/article/details/111646491)
 
 ```
-yarn add inquirer shelljs @commitlint/{cli,config-conventional} -D
+yarn add inquirer shelljs -D
+yarn add @commitlint/config-conventional @commitlint/cli -D
 ```
 
 11. 添加代码规范检查,代码写错时在调试台会有错误提示
