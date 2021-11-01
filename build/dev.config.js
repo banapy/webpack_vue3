@@ -154,7 +154,7 @@ module.exports = [
 		},
 		mode: 'development',
 		entry: {
-			decoder: resolve('./src/worker/index.ts'),
+			decoder: resolve('./src/worker/base/index.ts'),
 		},
 	},
 ]

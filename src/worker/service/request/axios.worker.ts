@@ -1,8 +1,12 @@
 import axios from 'axios'
 import qs from 'qs'
-import { AvailableServiceType } from '.'
-import { WorkerService, WorkerServiceResponse } from './WorkerService'
-import { WorkerServiceManager } from './WorkerServiceManager'
+import { AvailableServiceType } from '@/worker/base'
+import { new_eval } from '@/worker/base/utils'
+import {
+	WorkerService,
+	WorkerServiceResponse,
+} from '@/worker/base/WorkerService'
+import { WorkerServiceManager } from '@/worker/base/WorkerServiceManager'
 namespace Protocol {
 	function isGetMethod(request) {}
 }
@@ -14,11 +18,13 @@ export interface GetRequest {
 	type: 'get'
 	url: string
 	params?: object
+	cb?: string
 }
 export interface PostRequest {
 	type: 'post'
 	url: string
 	formData?: object
+	cb?: string
 }
 export type AxiosServiceRequest = GetRequest | PostRequest
 export class AxiosService extends WorkerService {
@@ -40,7 +46,7 @@ export class AxiosService extends WorkerService {
 		console.log('axios-service request:', request)
 		switch (request.type) {
 			case 'get':
-				const getRes = await instance({
+				let getRes = await instance({
 					url: request.url,
 					method: 'get',
 					params: request.params,
@@ -48,6 +54,9 @@ export class AxiosService extends WorkerService {
 						return qs.stringify(params, { indices: false })
 					},
 				})
+				if (request.cb) {
+					getRes.data = new_eval(request.cb)(getRes.data)
+				}
 				return { response: getRes.data }
 			case 'post':
 				const postRes = await instance({
@@ -67,6 +76,9 @@ export class AxiosService extends WorkerService {
 					],
 					data: request.formData,
 				})
+				if (request.cb) {
+					postRes.data = new_eval(request.cb)(postRes.data)
+				}
 				return { response: postRes.data }
 			default:
 				console.error(`${this.serviceId}:暂不支持请求的类型`)
