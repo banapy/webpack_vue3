@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { resolve } = require('./index')
 const webpack = require('webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-
+const { workerConfig } = require('./base.config')
+const path = require('path')
 const devWebpackConfig = merge(baseWebpackConfig, {
 	devtool: 'source-map',
 	devServer: {
@@ -50,4 +51,110 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 		}),
 	],
 })
-module.exports = devWebpackConfig
+exports.workerConfig = {
+	target: 'webworker',
+	context: __dirname,
+	devtool: 'source-map',
+	resolve: {
+		extensions: ['.js', '.ts'],
+		alias: {
+			'@': resolve('src'),
+		},
+		fallback: {
+			fs: false,
+		},
+	},
+	module: {
+		rules: [
+			{
+				test: /\.tsx?$/,
+				loader: 'ts-loader',
+				exclude: /node_modules/,
+				options: {
+					configFile: path.join(process.cwd(), 'tsconfig.json'),
+					onlyCompileBundledFiles: true,
+					transpileOnly: true, //关闭类型检查，即只进行转译
+					projectReferences: true,
+					compilerOptions: {
+						sourceMap: !false,
+						declaration: false,
+					},
+				},
+			},
+		],
+	},
+	output: {
+		path: path.join(process.cwd(), '..', 'dist/examples'),
+		filename: '[name].bundle.js',
+	},
+	performance: {
+		hints: false,
+	},
+	stats: {
+		all: false,
+		timings: true,
+		exclude: 'resources/',
+		errors: true,
+		entrypoints: true,
+		warnings: true,
+	},
+	mode: 'development',
+	entry: {
+		decoder: resolve('./src/worker/index.ts'),
+	},
+}
+module.exports = [
+	devWebpackConfig,
+	{
+		target: 'webworker',
+		context: __dirname,
+		devtool: 'source-map',
+		resolve: {
+			extensions: ['.js', '.ts'],
+			alias: {
+				'@': resolve('src'),
+			},
+			fallback: {
+				fs: false,
+			},
+		},
+		module: {
+			rules: [
+				{
+					test: /\.tsx?$/,
+					loader: 'ts-loader',
+					exclude: /node_modules/,
+					options: {
+						configFile: path.join(process.cwd(), 'tsconfig.json'),
+						onlyCompileBundledFiles: true,
+						transpileOnly: true, //关闭类型检查，即只进行转译
+						projectReferences: true,
+						compilerOptions: {
+							sourceMap: !false,
+							declaration: false,
+						},
+					},
+				},
+			],
+		},
+		output: {
+			path: path.join(process.cwd(), '..', 'dist/examples'),
+			filename: '[name].bundle.js',
+		},
+		performance: {
+			hints: false,
+		},
+		stats: {
+			all: false,
+			timings: true,
+			exclude: 'resources/',
+			errors: true,
+			entrypoints: true,
+			warnings: true,
+		},
+		mode: 'development',
+		entry: {
+			decoder: resolve('./src/worker/index.ts'),
+		},
+	},
+]

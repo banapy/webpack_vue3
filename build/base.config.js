@@ -1,27 +1,27 @@
-const path = require("path");
-const { VueLoaderPlugin } = require("vue-loader");
-const webpack = require("webpack");
-const CopyPlugin = require("copy-webpack-plugin");
-const { resolve } = require("./index");
-const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
+const webpack = require('webpack')
+const CopyPlugin = require('copy-webpack-plugin')
+const { resolve } = require('./index')
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const baseConfig = {
-	mode: "development",
-	entry: resolve("./src/main.ts"),
+	mode: 'development',
+	entry: resolve('./src/main.ts'),
 	// context: __dirname,
 	output: {
-		filename: "js/[name].bundle.js",
-		chunkFilename: "js/[name].chunk.js",
+		filename: 'js/[name].bundle.js',
+		chunkFilename: 'js/[name].chunk.js',
 		clean: true,
-		path: resolve("dist"),
+		path: resolve('dist'),
 	},
 	resolve: {
 		//./src/views/home.vue可写成@/viwes/home.vue
 		alias: {
-			"@": resolve("src"),
+			'@': resolve('src'),
 		},
 		//自动的扩展后缀，比如一个js文件，则引用时书写可不要写.js
-		extensions: [".js", ".ts", "tsx", ".vue", ".json", ".vue"],
+		extensions: ['.js', '.ts', 'tsx', '.vue', '.json', '.vue'],
 	},
 	module: {
 		rules: [
@@ -30,7 +30,7 @@ const baseConfig = {
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: "vue-loader",
+						loader: 'vue-loader',
 					},
 				],
 			},
@@ -48,7 +48,7 @@ const baseConfig = {
 				exclude: /node_modules/,
 				use: [
 					{
-						loader: "babel-loader",
+						loader: 'babel-loader',
 					},
 				],
 			},
@@ -56,13 +56,13 @@ const baseConfig = {
 				test: /\.(css|scss)$/,
 				use: [
 					{
-						loader: "style-loader",
+						loader: 'style-loader',
 					},
 					{
-						loader: "css-loader",
+						loader: 'css-loader',
 					},
 					{
-						loader: "sass-loader",
+						loader: 'sass-loader',
 					},
 				],
 			},
@@ -70,7 +70,7 @@ const baseConfig = {
 				test: /\.(png|jpe?g|gif|svg)$/,
 				use: [
 					{
-						loader: "url-loader",
+						loader: 'url-loader',
 						options: {
 							limit: 10000,
 							// name: utils.assetsPath("img/[name].[hash:7].[ext]"),
@@ -82,7 +82,7 @@ const baseConfig = {
 				test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
 				use: [
 					{
-						loader: "url-loader",
+						loader: 'url-loader',
 						options: {
 							limit: 10000,
 							// name: utils.assetsPath("img/[name].[hash:7].[ext]"),
@@ -92,7 +92,7 @@ const baseConfig = {
 			},
 			{
 				test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-				loader: "url-loader",
+				loader: 'url-loader',
 				options: {
 					limit: 10000,
 					// name: utils.assetsPath("fonts/[name].[hash:7].[ext]"),
@@ -100,32 +100,27 @@ const baseConfig = {
 			},
 		],
 	},
-	devServer: {
-		compress: true,
-		port: 8089,
-	},
-	target: "web",
+	target: 'web',
 	plugins: [
 		new VueLoaderPlugin(),
 		new CopyPlugin({
 			patterns: [
 				{
-					from: resolve("public"),
-					to: resolve("dist"),
-					toType: "dir",
+					from: resolve('public'),
+					to: resolve('dist'),
+					toType: 'dir',
 				},
 			],
 		}),
-	
 	],
-};
-const workerConfig = {
-	context: __dirname,
-	devtool: "source-map",
+}
+exports.workerConfig = {
+	// context: __dirname,
+	devtool: 'source-map',
 	resolve: {
-		extensions: [".js", ".ts"],
+		extensions: ['.js', '.ts'],
 		alias: {
-			"@": resolve("src"),
+			'@': resolve('src'),
 		},
 		fallback: {
 			fs: false,
@@ -135,10 +130,10 @@ const workerConfig = {
 		rules: [
 			{
 				test: /\.tsx?$/,
-				loader: "ts-loader",
+				loader: 'ts-loader',
 				exclude: /node_modules/,
 				options: {
-					configFile: path.join(process.cwd(), "tsconfig.json"),
+					configFile: resolve('tsconfig.json'),
 					onlyCompileBundledFiles: true,
 					transpileOnly: true, //关闭类型检查，即只进行转译
 					projectReferences: true,
@@ -151,8 +146,8 @@ const workerConfig = {
 		],
 	},
 	output: {
-		path: path.join(process.cwd(), "..", "dist/examples"),
-		filename: "[name].bundle.js",
+		path: resolve('dist/examples'),
+		filename: '[name].bundle.js',
 	},
 	performance: {
 		hints: false,
@@ -160,15 +155,15 @@ const workerConfig = {
 	stats: {
 		all: false,
 		timings: true,
-		exclude: "resources/",
+		exclude: 'resources/',
 		errors: true,
 		entrypoints: true,
 		warnings: true,
 	},
-	mode: "development",
-	target: "webworker",
+	mode: 'development',
+	target: 'webworker',
 	entry: {
-		decoder: resolve("./src/worker/index.ts"),
+		decoder: resolve('./src/worker/index.ts'),
 	},
-};
-module.exports = baseConfig;
+}
+module.exports = baseConfig

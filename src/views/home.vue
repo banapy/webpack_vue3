@@ -11,6 +11,9 @@ export default defineComponent({
 		const a: { str: string } = {
 			str: '',
 		}
+		const worker = new Worker('decoder.bundle.js')
+		worker.onerror = e => console.error(e)
+		worker.postMessage("something")
 		return {}
 	},
 })
