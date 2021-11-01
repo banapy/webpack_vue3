@@ -59,7 +59,10 @@ export class RequestController implements AbortController {
 	constructor(
 		public priority: number = 0,
 		public abortController: AbortController = new AbortController()
-	) {}
+	) {
+		this.priority = priority
+		this.abortController = abortController
+	}
 
 	get signal(): AbortSignal {
 		return this.abortController.signal

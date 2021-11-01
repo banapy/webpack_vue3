@@ -9,9 +9,6 @@ import { connect } from '@/worker/service/index'
 import { RequestService } from '@/worker/service/request/requestService'
 let u =
 	'http://101.34.72.114:8330/api/sys/house/queryList?pageNum=1&pageSize=99999&startTime=2019-10-10%2010%3A10%3A10'
-function new_eval(str) {
-	return new Function('return ' + str)()
-}
 export default defineComponent({
 	name: 'home',
 	setup(props, { slots, emit }) {
