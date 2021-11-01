@@ -9,6 +9,7 @@ export class RequestService {
 	private _serviceCreated = false
 	private readonly serviceType = AvailableServiceType.AXIOS
 	constructor(private readonly workerset: ConcurrentWorkerSet) {
+		this.workerset = workerset
 		this._serviceId = `${
 			this.serviceType
 		}-${RequestService.nextUniqueServiceId++}`
@@ -31,7 +32,7 @@ export class RequestService {
 			url: url,
 			params: params,
 		}
-		this.workerset.invokeRequest(this._serviceId, message)
+		return this.workerset.invokeRequest(this._serviceId, message)
 	}
 	post(url: string, formData?: object) {
 		let _formData = {}
@@ -52,6 +53,6 @@ export class RequestService {
 			url: url,
 			formData: _formData,
 		}
-		this.workerset.invokeRequest(this._serviceId, message, transferList)
+		return this.workerset.invokeRequest(this._serviceId, message, transferList)
 	}
 }
