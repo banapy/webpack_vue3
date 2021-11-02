@@ -6,7 +6,15 @@
 	"scripts": {
 		"start": "webpack serve --config ./build/dev.config.js",
 		"check-types": "tsc --watch",
-		"build": "webpack --config ./build/prod.config.js"
+		"build": "webpack --config ./build/prod.config.js",
+		"newserve": "vue-cli-service newserve --mode development",
+		"newbuild": "vue-cli-service newbuild"
+	},
+	"vuePlugins": {
+		"service": [
+			"./build/newserve.js",
+			"./build/newbuild.js"
+		]
 	},
 	"devDependencies": {
 		"@babel/core": "^7.15.8",

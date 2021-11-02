@@ -24,12 +24,6 @@ export default defineComponent({
 				res.requestService.get(u).then(res => {
 					console.log('worker result1', res)
 				})
-				res.requestService.get(u).then(res => {
-					console.log('worker result2', res)
-				})
-				res.requestService.get(u).then(res => {
-					console.log('worker result3', res)
-				})
 			})
 		}
 		return { handleClick }
